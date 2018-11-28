@@ -7,7 +7,7 @@ DBNAME = "news"
 
 
 def get_most_popular_articles():
-    """Return the three last articles the 'database', most popular."""
+    """Return the three last articles mos popular in the 'database'."""
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
     c.execute("SELECT title, COUNT(path) AS views " +
@@ -21,7 +21,7 @@ def get_most_popular_articles():
 
 
 def get_most_popular_authors():
-    """Return the authors the 'database', most popular."""
+    """Return the authors most popular in the 'database'."""
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
     c.execute("SELECT aut.name, COUNT(l.path) AS views " +
@@ -30,13 +30,13 @@ def get_most_popular_authors():
               "INNER JOIN authors aut ON aut.id=art.author " +
               "WHERE l.method='GET' AND l.status='200 OK' " +
               "GROUP BY aut.name ORDER BY views DESC")
-    articles = c.fetchall()
+    authors = c.fetchall()
     db.close()
-    return articles
+    return authors
 
 
 def get_day_most_errors():
-    """Return the authors the 'database', most popular."""
+    """Return date and percents erros in the 'database'."""
     db = psycopg2.connect(database=DBNAME)
     c = db.cursor()
     c.execute("SELECT to_char(DATE(time), 'DD/MM/YYYY') as date, " +
