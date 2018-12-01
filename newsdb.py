@@ -1,14 +1,15 @@
 # Database code for the DB News.
 
 import psycopg2
-import bleach
 
 DBNAME = "news"
+USER = "vagrant"
+PASSWORD = "secret"
 
 
 def get_most_popular_articles():
     """Return the three last articles mos popular in the 'database'."""
-    db = psycopg2.connect(database=DBNAME)
+    db = psycopg2.connect(database=DBNAME, user=USER, password=PASSWORD)
     c = db.cursor()
     c.execute("SELECT title, COUNT(path) AS views " +
               "FROM log INNER JOIN articles " +
@@ -22,7 +23,7 @@ def get_most_popular_articles():
 
 def get_most_popular_authors():
     """Return the authors most popular in the 'database'."""
-    db = psycopg2.connect(database=DBNAME)
+    db = psycopg2.connect(database=DBNAME, user=USER, password=PASSWORD)
     c = db.cursor()
     c.execute("SELECT aut.name, COUNT(l.path) AS views " +
               "FROM log l INNER JOIN articles art " +
@@ -37,18 +38,17 @@ def get_most_popular_authors():
 
 def get_day_most_errors():
     """Return date and percents erros in the 'database'."""
-    db = psycopg2.connect(database=DBNAME)
+    db = psycopg2.connect(database=DBNAME, user=USER, password=PASSWORD)
     c = db.cursor()
-    c.execute("SELECT to_char(DATE(time), 'DD/MM/YYYY') as date, " +
-              "to_char(cast((((select count(l2.status) as qtd " +
-              "from log l2 where l2.status <> '200 OK' " +
-              "group by DATE(l2.time) order by qtd " +
-              "desc limit 1)::Decimal * 100) " +
-              "/ (select count(l3.status) as qtd from log l3 " +
-              "where l3.status =  '200 OK' " +
-              "group by DATE(l3.time) order by qtd desc "
-              "limit 1)::Decimal) as DECIMAL), '999D99') as percents " +
-              "from log group by DATE(time) order by date desc limit 1;")
+
+    c.execute("SELECT TO_CHAR(DATE(l.time), 'DD/MM/YYYY') AS DATE, " +
+              "TO_CHAR(CAST(((COUNT(l.status)::DECIMAL * 100) / (SELECT " +
+              "COUNT(l2.status) AS qtd FROM log l2 WHERE l2.status = " +
+              "'200 OK' GROUP BY DATE(l2.time) ORDER BY qtd DESC " +
+              "LIMIT 1)::DECIMAL) AS DECIMAL), '999D99') AS PERCENTS " +
+              "FROM log l WHERE l.status <> '200 OK' GROUP BY DATE(l.time) " +
+              "ORDER BY percents LIMIT 1;")
+
     inf = c.fetchall()
     db.close()
     return inf

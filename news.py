@@ -1,8 +1,4 @@
 #!/usr/bin/env python3
-#
-# A buggy web service in need of a database.
-
-import datetime
 
 from flask import Flask, request, redirect, url_for
 
@@ -46,8 +42,8 @@ def main():
 
     TITLE1 = "<h2>The three most popular articles of all time:</h2>"
     TITLE2 = "<h2>The authors of most popular articles of all time:</h2>"
-    TITLE3 = "<h2>Days that more than 1%" +\
-        " of requests resulted in errors:</h2>"
+    TITLE3 = "<h2>Day in which more than 1%" +\
+        " of requests result in errors:</h2>"
 
     '''Main page of the news report.'''
     most_popular_articles = TITLE1 + \
