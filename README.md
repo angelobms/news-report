@@ -7,14 +7,14 @@ The program is created using:
 + [Psycopg](http://initd.org/psycopg/).
 
 
-# Prerequisites
+## Prerequisites
 + You must have [Python](https://www.python.org/downloads/) installed;
 + You must have [Vagrant](https://www.vagrantup.com/) installed;
 + You must have [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 installed.
 
 
-# Setup the VirtualBox
+## Setup the VirtualBox
 VirtualBox is the software that actually runs the virtual machine.
 Download and install the platform package for your operating system.
 You do not need the extension package or the SDK.
@@ -26,7 +26,7 @@ Center instead. Due to a reported bug, installing VirtualBox from the site
 can uninstall other software you need.
 
 
-# Setup the Vagrant
+## Setup the Vagrant
 Vagrant is the software that configures the VM and allows you to share files
 between your host computer and the VM's file system. Download and install
 the version of your operating system.
@@ -41,7 +41,7 @@ The shell prompt on your terminal may be different. In the Linux, the
 ```$``` sign is the shell prompt.
 
 
-# Config the VM
+## Config the VM
 + Copy and clone the repository
 https://github.com/udacity/fullstack-nanodegree-vm
 + Change to the vargranfullstack-nanodegree-vm directory on your terminal
@@ -53,7 +53,7 @@ inside the directory vagrant
 + Run ```vagrant ssh``` to log me on your newly installed Linux VM!
 
 
-# Logging in and logging out
+## Logging in and logging out
 If you type ```exit``` (or Ctrl - D) at the shell prompt inside the VM, you
 are logged off, and placed back in the shell of your host computer. To log
 back in, make sure you are in the same directory and type ```vagrant ssh```
@@ -63,14 +63,14 @@ If you restart your computer, you will need to run ```vagrant up``` to
 restart the VM.
 
 
-# Running the database
+## Running the database
 The PostgreSQL database server will automatically be started inside the VM.
 You can use the ```psql``` command-line tool to access and execute SQL
 statements. The Access to the database is performed with the user
 ```vagrant``` and password ```secret``` credential.
 
 
-# Downloading the data
+## Downloading the data
 + Download the data that will be used by the project
 [here](https://d17h27t6h515a5.cloudfront.net/topher/2016/August
 /57b5f748_newsdata/newsdata.zip);
@@ -86,7 +86,7 @@ COUNT(status) AS qtd FROM log WHERE status = '200 OK' GROUP BY DATE(time)
 ORDER BY qtd DESC``` to create the view ```qtdStatusOkByTime```
 in the database ```news```.
 
-# Runnig the news-report project
+## Runnig the news-report project
 
 + Inside the VM, change the directory to ``` /vagrant```;
 + Change the directory to the news - report directory: ```cd news-report/```;
@@ -94,5 +94,5 @@ in the database ```news```.
 + Open the link http://0.0.0.0:8000/ in bowser.
 
 
-# Author
+## Author
 Angelo Brandão - angelobms@gmail.com
