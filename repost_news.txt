@@ -13,6 +13,6 @@ The authors of most popular articles of all time:
 	Anonymous Contributor - 170098 views
 	Markoff Chaney - 84557 views
 
-Days that more than 1% of requests resulted in errors:
+Day in which more than 1% of requests resulted in errors:
 
 	17/07/2016 - 2.32% error
